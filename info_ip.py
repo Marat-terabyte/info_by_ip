@@ -43,11 +43,12 @@ def get_info_by_ip(ip_addres):
 
 def discover_IP():
 	""" It's function for discover IP """
-	response = requests.get("https://2ip.ru/").text
-	soup 	 = BeautifulSoup(response, "lxml")
-	ip 		 = soup.find("div", class_ = "ip").find("span").text
-	
-	print(Fore.RED + "Check your connection!")
+	try:
+		response = requests.get("https://2ip.ru/").text
+		soup 	 = BeautifulSoup(response, "html.parser")
+		ip 		 = soup.find("div", class_ = "ip").find("span").text
+	except:
+		print(Fore.RED + "Check your connection!")
 	
 	return ip
 
