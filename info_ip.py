@@ -19,10 +19,10 @@ def main():
 	elif choice == "2" or choice == "2)":
 		ip_addres = str(input("Enter ip addres:"))
 	
-	if choice == "3" or choice == "3)":
+	elif choice == "3" or choice == "3)":
 		domain = str(input("Enter site's domain:"))
 		ip_addres = str(socket.gethostbyname(domain))
-		
+
 	else:
 		print(Fore.RED + "No such option!")
 		quit()
