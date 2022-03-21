@@ -1,14 +1,17 @@
 try:
+	import socket						# It's module for work with Network
 	import requests						# It's module for work with HTTP requests
-	from bs4 import BeautifulSoup		# It's module for 
+	from bs4 import BeautifulSoup		# It's module for parsing HTML
 	from colorama import Fore, init		# It's module for color text
-except:
+except ModuleNotFoundError as error:
+	print(error)
 	print("execute command!\n pip install requests\n pip install beautifulsoup4\n pip install colorama")
 	quit()
+
 init()
 
 def main():
-	choice = str(input("1) Your ip addres; 2) Enter ip addres:"))
+	choice = str(input("1) Your ip addres; 2) Enter ip addres; 3) Get ip addres from domain:"))
 
 	if choice == "1" or choice == "1)":
 		ip_addres = discover_IP()
@@ -16,6 +19,10 @@ def main():
 	elif choice == "2" or choice == "2)":
 		ip_addres = str(input("Enter ip addres:"))
 	
+	if choice == "3" or choice == "3)":
+		domain = str(input("Enter site's domain:"))
+		ip_addres = str(socket.gethostbyname(domain))
+		
 	else:
 		print(Fore.RED + "No such option!")
 		quit()
@@ -23,6 +30,7 @@ def main():
 	get_info_by_ip(ip_addres)
 
 def get_info_by_ip(ip_addres):
+	""" Get data from site """
 	try:
 		info = requests.get(f"http://ip-api.com/json/{ip_addres}").json()
 	
